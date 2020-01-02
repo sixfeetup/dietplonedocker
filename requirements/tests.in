@@ -11,4 +11,4 @@ robotframework-selenium2library == 3.0.0
 robotframework-selenium2screenshots == 0.8.1
 robotframework-seleniumlibrary == 3.3.1
 robotsuite == 2.0.0
-selenium == 3.141.0
+selenium == 3.141.0 
