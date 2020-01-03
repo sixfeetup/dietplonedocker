@@ -13,7 +13,11 @@ build: Dockerfile
 	docker build -t dietplonedocker:$(TAG) .
 
 run: build
-	docker run -p $(PORT):8080 --name $(NAME) dietplonedocker:$(TAG)
+	@echo The inituser:
+	@docker run dietplonedocker:$(TAG) cat /opt/plone/inituser
+	@docker stop $(NAME) || true
+	docker run --rm -p $(PORT):8080 --name $(NAME) -v $(PWD)/src:/opt/plone/src dietplonedocker:$(TAG)
+
 
 shell:
 	## shell in to the running instance
