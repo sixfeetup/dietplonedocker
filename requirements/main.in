@@ -46,7 +46,7 @@ Products.ZopeVersionControl==1.1.4
 Products.statusmessages==5.0.4
 PyJWT==1.7.1
 Record==3.5
-RestrictedPython==4.0
+RestrictedPython==5.0
 Unidecode==0.4.1
 WSGIProxy2==0.4.6
 WebOb==1.8.5

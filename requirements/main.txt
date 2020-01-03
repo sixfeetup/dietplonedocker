@@ -612,9 +612,9 @@ repoze.xmliter==0.6 \
 requests==2.22.0 \
     --hash=sha256:11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4 \
     --hash=sha256:9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31
-restrictedpython==4.0 \
-    --hash=sha256:3122bdb1681e72893caa4c5bff93df889d4b8548e75caec95f1b4b8713a2e0ce \
-    --hash=sha256:998bcd1648796e238d1cebbefcd2ffd34b1b750e8d5b6ef5c4774780c51449e4
+restrictedpython==5.0 \
+    --hash=sha256:9bd69505147b0ff8c68f4ff5a275975a3ab66fc43cbf3b61a195650ed767cd4e \
+    --hash=sha256:a080569bffdf53371ae3e754ab1732f43054b1bab904fc100f74ba68ac731abc
 roman==3.2 \
     --hash=sha256:b1aa46b531f896b9d3aa05ede8208d785626be16b02c0df57c971fcb9940ae63 \
     --hash=sha256:e55ef65e7960089a89a4c7efe1006bd31b7c826240b6d17659ad1b34bbcfbad5
