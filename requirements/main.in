@@ -78,7 +78,7 @@ future==0.17.1
 icalendar==4.0.3
 idna==2.8
 jarn.checkinterval==1.0
-jsonschema==3.0.1
+jsonschema==3.2.0
 lxml==4.3.4
 mockup==3.0.2
 persistent==4.5.0
