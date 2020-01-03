@@ -1,12 +1,27 @@
+TAG=latest
+
 all:
 
 requirements:
 	## combine the zope and plone requirements 
 	cd requirements && pip-compile --no-annotate --no-header --allow-unsafe --generate-hashes main.in
 
-clean:  ## remove dangling images
-	for image in `docker images -f "dangling=true" -q`; do \
-		echo removing ${image} && docker rmi $$image ; done
+build: Dockerfile
+	## create the build and runtime images
+	docker build -t dietplonedocker:$(TAG) .
+
+run: build
+	docker run -p 8080:8080 dietplonedocker:$(TAG)
+
+clean:
+	## remove the latest build
+	docker rmi dietplonedocker:$(TAG)
+
+squeaky_clean:  clean  ## aggressively remove unused images
+	@docker rmi python:3.7-slim-buster
+	@docker system prune -a
+	@for image in `docker images -f "dangling=true" -q`; do \
+		echo removing $$image && docker rmi $$image ; done
 
 
 help: ## This help.
@@ -16,4 +31,4 @@ help: ## This help.
 		/^\t## (.*)/ { match($$0, "[^\t#:\\\\]+"); txt=substr($$0,RSTART,RLENGTH);printf " \033[36m%-10s\033[0m", target; printf " %s\n", txt ; target=""} \
 		/^## .*/ {match($$0, "## (.+)$$"); txt=substr($$0,4,RLENGTH);printf "\n\033[33m%s\033[0m\n", txt ; target=""} \
 	' $(MAKEFILE_LIST)
-.PHONY: help requirements
+.PHONY: help requirements clean squeaky_clean
