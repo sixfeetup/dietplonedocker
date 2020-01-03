@@ -1,4 +1,6 @@
 TAG=latest
+PORT=8080
+NAME=dpd
 
 all:
 
@@ -11,11 +13,15 @@ build: Dockerfile
 	docker build -t dietplonedocker:$(TAG) .
 
 run: build
-	docker run -p 8080:8080 dietplonedocker:$(TAG)
+	docker run -p $(PORT):8080 --name $(NAME) dietplonedocker:$(TAG)
+
+shell:
+	## shell in to the running instance
+	docker exec -it $(NAME) /bin/bash
 
 clean:
 	## remove the latest build
-	docker rmi dietplonedocker:$(TAG)
+	docker rmi -f dietplonedocker:$(TAG)
 
 squeaky_clean:  clean  ## aggressively remove unused images
 	@docker rmi python:3.7-slim-buster
