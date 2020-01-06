@@ -75,7 +75,7 @@ five.customerize==2.0.0
 five.intid==1.2.3
 five.localsitemanager==3.2.2
 future==0.17.1
-icalendar==4.0.3
+icalendar==4.0.4
 idna==2.8
 jarn.checkinterval==1.0
 jsonschema==3.0.1
