@@ -87,6 +87,6 @@ zope.tal==4.4
 zope.tales==5.0.1
 zope.testbrowser==5.3.3
 zope.testing==4.7
-zope.testrunner==5.0
+zope.testrunner==5.2
 zope.traversing==4.3.1
 zope.viewlet==4.2.1
