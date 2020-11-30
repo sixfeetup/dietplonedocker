@@ -2,7 +2,7 @@
 ARG PLONE_ROOT=/opt/plone
 
 # Phase one, Build:
-FROM python:3.7-slim-buster as build
+FROM python:3.8-slim-buster as build
 
 ARG PLONE_ROOT
 
@@ -19,6 +19,7 @@ RUN set -x \
     && apt-get install --no-install-recommends -y \
         dpkg-dev \
         gcc \
+        git \
         libbz2-dev \
         libc6-dev \
         libffi-dev \
@@ -44,7 +45,7 @@ ENV PATH="${PLONE_ROOT}/bin:${PATH}"
 # TODO: We use --require-hashes in our requirements files, but not here, making
 #       the ones in the requirements files kind of a moot point. We should
 #       probably pin these too, and update them as we do anything else.
-RUN pip --no-cache-dir --disable-pip-version-check install --upgrade pip setuptools wheel
+RUN pip --no-cache-dir --disable-pip-version-check install --upgrade -r https://dist.plone.org/release/5.2.3/requirements.txt
 
 COPY requirements /tmp/requirements
 
@@ -59,16 +60,18 @@ RUN set -x \
 # Plone's dependencies.
 RUN set -x \
     && pip --no-cache-dir --disable-pip-version-check install \
-        -r /tmp/requirements/main.txt \
-            $(if [ "$DEVEL" = "yes" ]; then echo '-r /tmp/requirements/tests.txt'; fi) \
+        Plone Paste -c https://dist.plone.org/release/5.2.3/constraints3.txt  \
     && find $PLONE_ROOT -name '*.pyc' -delete
+
+RUN set -x \
+    && pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/deploy.txt
 
 
 # Phase Two: the Runtime image
 
 # Now we're going to build our actual application image, which will eventually
 # pull in the static files that were built above.
-FROM python:3.7-slim-buster
+FROM python:3.8-slim-buster
 ARG PLONE_ROOT
 
 # Setup some basic environment variables that are ~never going to change.

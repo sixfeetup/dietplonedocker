@@ -1,1 +1,1 @@
-pip-tools==4.3.0
+pip-tools

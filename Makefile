@@ -4,10 +4,6 @@ NAME=dpd
 
 all:
 
-requirements:
-	## combine the zope and plone requirements 
-	cd requirements && pip-compile --no-annotate --no-header --allow-unsafe --generate-hashes main.in
-
 build: Dockerfile
 	## create the build and runtime images
 	docker build -t dietplonedocker:$(TAG) .
