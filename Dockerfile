@@ -2,7 +2,7 @@
 ARG PLONE_ROOT=/opt/plone
 
 # Phase one, Build:
-FROM python:3.8-slim-buster as build
+FROM python:3.9.0-slim-buster as build
 
 ARG PLONE_ROOT
 
@@ -71,7 +71,7 @@ RUN set -x \
 
 # Now we're going to build our actual application image, which will eventually
 # pull in the static files that were built above.
-FROM python:3.8-slim-buster
+FROM python:3.9.0-slim-buster
 ARG PLONE_ROOT
 
 # Setup some basic environment variables that are ~never going to change.
