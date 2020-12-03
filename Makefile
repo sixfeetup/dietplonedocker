@@ -4,6 +4,7 @@ NAME=dpd
 
 all:
 
+build: export DOCKER_BUILDKIT = 1
 build: Dockerfile
 	## create the build and runtime images
 	docker build -t dietplonedocker:$(TAG) .
