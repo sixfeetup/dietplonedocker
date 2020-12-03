@@ -47,13 +47,6 @@ ENV PATH="${PLONE_ROOT}/bin:${PATH}"
 #       probably pin these too, and update them as we do anything else.
 RUN pip --no-cache-dir --disable-pip-version-check install --upgrade -r https://dist.plone.org/release/5.2.3/requirements.txt
 
-COPY requirements /tmp/requirements
-
-# Install our development dependencies if we're building a development install
-# otherwise this will do nothing.
-RUN set -x \
-    && if [ "$DEVEL" = "yes" ]; then pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/dev.txt; fi
-
 # Install the Python level requirements, this is done after copying
 # the requirements but prior to copying zope itself into the container so
 # that code changes don't require triggering an entire install of all of
@@ -63,9 +56,13 @@ RUN set -x \
         Plone Paste -c https://dist.plone.org/release/5.2.3/constraints3.txt  \
     && find $PLONE_ROOT -name '*.pyc' -delete
 
-RUN set -x \
-    && pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/deploy.txt
+# Install our deploy and optionally our development dependencies if we're building a development install
+# otherwise this will do nothing.
 
+COPY requirements /tmp/requirements
+RUN set -x \
+    && pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/deploy.txt \
+    && if [ "$DEVEL" = "yes" ]; then pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/dev.txt; fi
 
 # Phase Two: the Runtime image
 
