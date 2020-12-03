@@ -60,6 +60,7 @@ RUN set -x \
 # otherwise this will do nothing.
 
 COPY requirements /tmp/requirements
+RUN ls -al /tmp/requirements
 RUN set -x \
     && pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/deploy.txt \
     && if [ "$DEVEL" = "yes" ]; then pip --no-cache-dir --disable-pip-version-check install -r /tmp/requirements/dev.txt; fi
