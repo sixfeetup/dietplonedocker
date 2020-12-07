@@ -1,19 +1,19 @@
 TAG=latest
 PORT=8080
-NAME=dpd
+NAME=plone
 
 all:
 
 build: export DOCKER_BUILDKIT = 1
 build: Dockerfile
 	## create the build and runtime images
-	docker build -t dietplonedocker:$(TAG) .
+	docker build -t sixfeetup/dietplonedocker:$(TAG) .
 
 run: build
 	@echo The inituser:
-	@docker run dietplonedocker:$(TAG) cat /opt/plone/inituser
+	@docker run sixfeetup/dietplonedocker:$(TAG) cat /opt/plone/inituser
 	@docker stop $(NAME) || true
-	docker run --rm -p $(PORT):8080 --name $(NAME) -v $(PWD)/src:/opt/plone/src dietplonedocker:$(TAG)
+	docker run --rm -p $(PORT):8080 --name $(NAME) -v $(PWD)/src:/opt/plone/src sixfeetup/dietplonedocker:$(TAG)
 
 
 shell:
@@ -22,7 +22,7 @@ shell:
 
 clean:
 	## remove the latest build
-	docker rmi -f dietplonedocker:$(TAG)
+	docker rmi -f sixfeetup/dietplonedocker:$(TAG)
 
 squeaky_clean:  clean  ## aggressively remove unused images
 	@docker rmi python:3.7-slim-buster
