@@ -244,5 +244,3 @@ fabric.properties
 .history/
 
 .gitignore
-requirements/deploy.txt
-src/
