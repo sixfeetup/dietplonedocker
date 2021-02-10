@@ -6,8 +6,8 @@ This is an experiement in making a slim Plone Docker image for a more Cloud Nati
 
 To try out Plone with no install needed just run these two commands:
 
-    $ docker run --rm sixfeetup/dietdockerplone cat /opt/plone/inituser
-    $ docker run --rm -p 8080:8080 sixfeetup/dietdockerplone
+    $ docker run --rm sixfeetup/dietplonedocker cat /opt/plone/inituser
+    $ docker run --rm -p 8080:8080 sixfeetup/dietplonedocker
 
 This will grab the latest image from Docker Hub and allow you to run without downloading the code to your computer. 
 
